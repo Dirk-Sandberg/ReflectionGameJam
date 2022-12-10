@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/Tilemap/TX Tileset Wall.png" type="Texture" id=1]
 [ext_resource path="res://assets/Tilemap/TX Tileset Grass.png" type="Texture" id=2]
+[ext_resource path="res://assets/Tilemap/TX Player.png" type="Texture" id=3]
+[ext_resource path="res://assets/Brick3DRegular-nRJR4.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Scenes/TextBox.gd" type="Script" id=5]
+[ext_resource path="res://assets/clipart1126331.png" type="Texture" id=6]
 
 [sub_resource type="TileSet" id=1]
 0/name = "TX Tileset Grass.png 0"
@@ -161,17 +165,11 @@
 0/tile_mode = 0
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 32 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 32 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 0/shape_one_way = false
-0/shape_one_way_margin = 1.0
-0/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": null,
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 32 )
-} ]
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
 0/z_index = 0
 1/name = "TX Tileset Wall.png 1"
 1/texture = ExtResource( 1 )
@@ -202,7 +200,14 @@
 2/shapes = [  ]
 2/z_index = 0
 
+[sub_resource type="DynamicFont" id=3]
+size = 24
+outline_size = 1
+outline_color = Color( 0.0588235, 0.137255, 0.0392157, 1 )
+font_data = ExtResource( 4 )
+
 [node name="TextBox" type="CanvasLayer"]
+script = ExtResource( 5 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 1 )
@@ -226,4 +231,28 @@ tile_data = PoolIntArray( 917513, 10, 0, 917514, 10, 0, 917515, 9, 0, 917516, 4,
 tile_set = SubResource( 2 )
 cell_size = Vector2( 32, 32 )
 format = 1
-tile_data = PoolIntArray( 524302, 0, 0, 1048584, 0, 0, 1048599, 0, 0, 1114121, 0, 0, 1114122, 1, 0, 1114123, 1, 0, 1114124, 0, 0, 1114125, 2, 0, 1114126, 0, 0, 1114127, 2, 0, 1114128, 0, 0, 1114129, 2, 0, 1114130, 0, 0, 1114131, 2, 0, 1114132, 2, 0, 1114133, 0, 0, 1114134, 1, 0 )
+tile_data = PoolIntArray( 1048584, 0, 0, 1048599, 0, 0, 1114121, 0, 0, 1114122, 1, 0, 1114123, 1, 0, 1114124, 0, 0, 1114125, 2, 0, 1114126, 0, 0, 1114127, 2, 0, 1114128, 0, 0, 1114129, 2, 0, 1114130, 0, 0, 1114131, 2, 0, 1114132, 2, 0, 1114133, 0, 0, 1114134, 1, 0 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 284, 425 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 3 )
+centered = false
+hframes = 4
+vframes = 3
+
+[node name="ContinueButton" type="Sprite" parent="."]
+position = Vector2( 711, 486 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 6 )
+centered = false
+
+[node name="Label" type="Label" parent="."]
+margin_left = 383.0
+margin_top = 468.0
+margin_right = 716.0
+margin_bottom = 556.0
+custom_fonts/font = SubResource( 3 )
+text = "Well I guess this is it"
+
+[node name="Tween" type="Tween" parent="Label"]
