@@ -2,6 +2,7 @@ extends CanvasLayer
 
 var total_text
 var i = 0
+onready var tween = $Label/Tween
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	visible = true
@@ -11,6 +12,12 @@ func _physics_process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		if not visible:
 			return
+
+		if $Label.percent_visible != 1:
+			tween.stop_all()
+			$Label.percent_visible = 1
+			return
+
 
 		i += 1
 		if i >= len(total_text):
@@ -22,7 +29,7 @@ func _physics_process(_delta):
 
 func show_line(text):
 	$Label.text = text
-	var tween = $Label/Tween
+
 	tween.interpolate_property($Label, "percent_visible",
 			0, 1, 1.5,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
