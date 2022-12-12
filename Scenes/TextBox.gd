@@ -5,13 +5,19 @@ var i = 0
 onready var tween = $Label/Tween
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	visible = true
-	display_text(["Well, I guess this is it", "nothing left to do", "except be myself"])
+	visible = false
+	pass
 
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
+		$ContinueButton.modulate.v = .80
+	if Input.is_action_just_released("ui_accept"):
+		$ContinueButton.modulate.v = 1
+
+	if Input.is_action_just_pressed("ui_accept"):
 		if not visible:
 			return
+
 
 		if $Label.percent_visible != 1:
 			tween.stop_all()
@@ -36,6 +42,7 @@ func show_line(text):
 	tween.start()
 	
 func display_text(text):
+	visible = true
 	total_text = text
 	show_line(text[i])
 
